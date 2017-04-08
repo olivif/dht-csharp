@@ -24,6 +24,7 @@
         /// <summary>
         /// Calculate the distance between two nodes
         /// </summary>
+        /// <remarks>Not currently used</remarks>
         public int GetDistance(NodeId other)
         {
             var distance = 0;
