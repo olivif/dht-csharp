@@ -52,7 +52,7 @@
             byte[] bytes = new byte[numberOfBytes];
 
             var randomSeed = Guid.NewGuid().GetHashCode();
-            var random = new Random();
+            var random = new Random(randomSeed);
             random.NextBytes(bytes);
 
             return bytes;
