@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Responsible for holding a unique node id
+    /// </summary>
     public class NodeId
     {
         private readonly int numberOfBytes = 20;
