@@ -13,7 +13,7 @@
 
         private IList<Node> nodes;
 
-        private Dictionary<Int32, string> store;
+        private Dictionary<string, string> store;
 
         private IConsistentHashGenerator hashGenerator;
 
@@ -36,14 +36,14 @@
             var random = new Random(randomSeed);
             this.nodeId = random.Next(Int32.MinValue, Int32.MaxValue);
             this.nodes = new List<Node>();
-            this.store = new Dictionary<Int32, string>();
+            this.store = new Dictionary<string, string>();
             this.hashGenerator = new Sha256HashGenerator();
         }
 
         /// <summary>
         /// Gets a value using the key
         /// </summary>
-        public string GetValue(Int32 key)
+        public string GetValue(string key)
         {
             string value;
             this.store.TryGetValue(key, out value);
@@ -54,9 +54,8 @@
         /// <summary>
         /// Store a value
         /// </summary>
-        public void StoreValue(string value)
+        public void StoreValue(string key, string value)
         {
-            var key = this.hashGenerator.Hash(value);
             this.store.Add(key, value);
         }
 
