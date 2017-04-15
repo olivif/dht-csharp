@@ -23,10 +23,10 @@ namespace Dhtproto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CglkaHQucHJvdG8SCGRodHByb3RvIiAKDVN0cmluZ01lc3NhZ2USDwoHbWVz",
-            "c2FnZRgBIAEoCTJOCgxIZWxsb1NlcnZpY2USPgoIU2F5SGVsbG8SFy5kaHRw",
-            "cm90by5TdHJpbmdNZXNzYWdlGhcuZGh0cHJvdG8uU3RyaW5nTWVzc2FnZSIA",
-            "QjgKG2lvLmdycGMuZXhhbXBsZXMucm91dGVndWlkZUIRSGVsbG9TZXJ2aWNl",
-            "UHJvdG9QAaICA1JUR2IGcHJvdG8z"));
+            "c2FnZRgBIAEoCTJRCg9EaHRQcm90b1NlcnZpY2USPgoIU2F5SGVsbG8SFy5k",
+            "aHRwcm90by5TdHJpbmdNZXNzYWdlGhcuZGh0cHJvdG8uU3RyaW5nTWVzc2Fn",
+            "ZSIAQjgKG2lvLmdycGMuZXhhbXBsZXMucm91dGVndWlkZUIRSGVsbG9TZXJ2",
+            "aWNlUHJvdG9QAaICA1JUR2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {

@@ -11,9 +11,9 @@ namespace Dhtproto {
   /// <summary>
   /// Interface exported by the server.
   /// </summary>
-  public static partial class HelloService
+  public static partial class DhtProtoService
   {
-    static readonly string __ServiceName = "dhtproto.HelloService";
+    static readonly string __ServiceName = "dhtproto.DhtProtoService";
 
     static readonly grpc::Marshaller<global::Dhtproto.StringMessage> __Marshaller_StringMessage = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Dhtproto.StringMessage.Parser.ParseFrom);
 
@@ -30,8 +30,8 @@ namespace Dhtproto {
       get { return global::Dhtproto.DhtReflection.Descriptor.Services[0]; }
     }
 
-    /// <summary>Base class for server-side implementations of HelloService</summary>
-    public abstract partial class HelloServiceBase
+    /// <summary>Base class for server-side implementations of DhtProtoService</summary>
+    public abstract partial class DhtProtoServiceBase
     {
       /// <summary>
       /// A simple RPC.
@@ -48,26 +48,26 @@ namespace Dhtproto {
 
     }
 
-    /// <summary>Client for HelloService</summary>
-    public partial class HelloServiceClient : grpc::ClientBase<HelloServiceClient>
+    /// <summary>Client for DhtProtoService</summary>
+    public partial class DhtProtoServiceClient : grpc::ClientBase<DhtProtoServiceClient>
     {
-      /// <summary>Creates a new client for HelloService</summary>
+      /// <summary>Creates a new client for DhtProtoService</summary>
       /// <param name="channel">The channel to use to make remote calls.</param>
-      public HelloServiceClient(grpc::Channel channel) : base(channel)
+      public DhtProtoServiceClient(grpc::Channel channel) : base(channel)
       {
       }
-      /// <summary>Creates a new client for HelloService that uses a custom <c>CallInvoker</c>.</summary>
+      /// <summary>Creates a new client for DhtProtoService that uses a custom <c>CallInvoker</c>.</summary>
       /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
-      public HelloServiceClient(grpc::CallInvoker callInvoker) : base(callInvoker)
+      public DhtProtoServiceClient(grpc::CallInvoker callInvoker) : base(callInvoker)
       {
       }
       /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
-      protected HelloServiceClient() : base()
+      protected DhtProtoServiceClient() : base()
       {
       }
       /// <summary>Protected constructor to allow creation of configured clients.</summary>
       /// <param name="configuration">The client configuration.</param>
-      protected HelloServiceClient(ClientBaseConfiguration configuration) : base(configuration)
+      protected DhtProtoServiceClient(ClientBaseConfiguration configuration) : base(configuration)
       {
       }
 
@@ -124,15 +124,15 @@ namespace Dhtproto {
         return CallInvoker.AsyncUnaryCall(__Method_SayHello, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
-      protected override HelloServiceClient NewInstance(ClientBaseConfiguration configuration)
+      protected override DhtProtoServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
-        return new HelloServiceClient(configuration);
+        return new DhtProtoServiceClient(configuration);
       }
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
-    public static grpc::ServerServiceDefinition BindService(HelloServiceBase serviceImpl)
+    public static grpc::ServerServiceDefinition BindService(DhtProtoServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_SayHello, serviceImpl.SayHello).Build();

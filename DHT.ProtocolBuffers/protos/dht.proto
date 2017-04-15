@@ -8,7 +8,8 @@ option objc_class_prefix = "RTG";
 package dhtproto;
 
 // Interface exported by the server.
-service HelloService {
+service DhtProtoService {
+
   // A simple RPC.
   //
   // Says hello
