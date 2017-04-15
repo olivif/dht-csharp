@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IConsistentHashGenerator.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="NodeServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sha256HashGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Grpc.Core, Version=1.0.1.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
