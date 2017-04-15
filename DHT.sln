@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHT.Tests", "DHT.Tests\DHT.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHT.ProtocolBuffers", "DHT.ProtocolBuffers\DHT.ProtocolBuffers.csproj", "{76BAF981-F995-4CB9-B9D5-229A822BD8FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHT.Runner", "DHT.Runner\DHT.Runner.csproj", "{40FABD93-3D5C-4DDD-99B5-288378F41FC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{76BAF981-F995-4CB9-B9D5-229A822BD8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76BAF981-F995-4CB9-B9D5-229A822BD8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76BAF981-F995-4CB9-B9D5-229A822BD8FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40FABD93-3D5C-4DDD-99B5-288378F41FC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40FABD93-3D5C-4DDD-99B5-288378F41FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40FABD93-3D5C-4DDD-99B5-288378F41FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40FABD93-3D5C-4DDD-99B5-288378F41FC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
