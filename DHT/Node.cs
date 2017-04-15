@@ -22,7 +22,6 @@
         public IList<Node> Nodes
         {
             get { return this.nodes; }
-            set { this.nodes = value; }
         }
 
         /// <summary>
