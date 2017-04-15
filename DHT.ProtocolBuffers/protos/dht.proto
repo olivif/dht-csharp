@@ -10,13 +10,22 @@ package dhtproto;
 // Interface exported by the server.
 service DhtProtoService {
 
-  // A simple RPC.
-  //
-  // Says hello
-  //
   rpc SayHello(StringMessage) returns (StringMessage) {}
+
+  rpc GetValue(KeyMessage) returns (KeyValueMessage) {}
+ 
+  rpc StoreValue(KeyValueMessage) returns (KeyValueMessage) {}
 }
 
 message StringMessage {
   string message = 1;
+}
+
+message KeyMessage {
+  string key = 1;
+}
+
+message KeyValueMessage {
+  string key = 1;
+  string value = 2;
 }

@@ -41,6 +41,14 @@
         }
 
         /// <summary>
+        /// Checks if the value associated with this key is stored locally
+        /// </summary>
+        public bool HasKey(string key)
+        {
+            return this.store.ContainsKey(key);
+        }
+
+        /// <summary>
         /// Gets a value using the key
         /// </summary>
         public string GetValue(string key)
@@ -60,17 +68,17 @@
         }
 
         /// <summary>
-        /// Find the node which should store this value
+        /// Find the node which should store this key
         /// </summary>
-        public Node FindNode(string value)
+        public Node FindNode(string key)
         {
-            var key = this.hashGenerator.Hash(value);
+            var hashKey = this.hashGenerator.Hash(key);
 
             // The node which stores this value should be the one with the smallest
             // key below the key generated.
             var sortedNodes = this.nodes.OrderBy(node => node.NodeId).ToList();
 
-            var nodeToStore = sortedNodes.FindLast(node => node.nodeId < key);
+            var nodeToStore = sortedNodes.FindLast(node => node.nodeId < hashKey);
 
             return nodeToStore;
         }
