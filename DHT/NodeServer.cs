@@ -10,7 +10,7 @@
         {
             var stringMessage = new StringMessage()
             {
-                Message = "Hello"
+                Message = "Received " + request.Message
             };
 
             return Task.FromResult<StringMessage>(stringMessage);
