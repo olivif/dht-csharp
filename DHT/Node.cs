@@ -13,7 +13,7 @@
 
         private IList<Node> nodes;
 
-        private Dictionary<Int32, string> store;
+        private Dictionary<string, string> store;
 
         private IConsistentHashGenerator hashGenerator;
 
@@ -36,14 +36,22 @@
             var random = new Random(randomSeed);
             this.nodeId = random.Next(Int32.MinValue, Int32.MaxValue);
             this.nodes = new List<Node>();
-            this.store = new Dictionary<Int32, string>();
+            this.store = new Dictionary<string, string>();
             this.hashGenerator = new Sha256HashGenerator();
+        }
+
+        /// <summary>
+        /// Checks if the value associated with this key is stored locally
+        /// </summary>
+        public bool HasKey(string key)
+        {
+            return this.store.ContainsKey(key);
         }
 
         /// <summary>
         /// Gets a value using the key
         /// </summary>
-        public string GetValue(Int32 key)
+        public string GetValue(string key)
         {
             string value;
             this.store.TryGetValue(key, out value);
@@ -54,24 +62,23 @@
         /// <summary>
         /// Store a value
         /// </summary>
-        public void StoreValue(string value)
+        public void StoreValue(string key, string value)
         {
-            var key = this.hashGenerator.Hash(value);
             this.store.Add(key, value);
         }
 
         /// <summary>
-        /// Find the node which should store this value
+        /// Find the node which should store this key
         /// </summary>
-        public Node FindNode(string value)
+        public Node FindNode(string key)
         {
-            var key = this.hashGenerator.Hash(value);
+            var hashKey = this.hashGenerator.Hash(key);
 
             // The node which stores this value should be the one with the smallest
             // key below the key generated.
             var sortedNodes = this.nodes.OrderBy(node => node.NodeId).ToList();
 
-            var nodeToStore = sortedNodes.FindLast(node => node.nodeId < key);
+            var nodeToStore = sortedNodes.FindLast(node => node.nodeId < hashKey);
 
             return nodeToStore;
         }

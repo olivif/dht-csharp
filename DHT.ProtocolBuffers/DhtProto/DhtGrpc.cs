@@ -16,6 +16,8 @@ namespace Dhtproto {
     static readonly string __ServiceName = "dhtproto.DhtProtoService";
 
     static readonly grpc::Marshaller<global::Dhtproto.StringMessage> __Marshaller_StringMessage = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Dhtproto.StringMessage.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Dhtproto.KeyMessage> __Marshaller_KeyMessage = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Dhtproto.KeyMessage.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Dhtproto.KeyValueMessage> __Marshaller_KeyValueMessage = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Dhtproto.KeyValueMessage.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Dhtproto.StringMessage, global::Dhtproto.StringMessage> __Method_SayHello = new grpc::Method<global::Dhtproto.StringMessage, global::Dhtproto.StringMessage>(
         grpc::MethodType.Unary,
@@ -23,6 +25,20 @@ namespace Dhtproto {
         "SayHello",
         __Marshaller_StringMessage,
         __Marshaller_StringMessage);
+
+    static readonly grpc::Method<global::Dhtproto.KeyMessage, global::Dhtproto.KeyValueMessage> __Method_GetValue = new grpc::Method<global::Dhtproto.KeyMessage, global::Dhtproto.KeyValueMessage>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetValue",
+        __Marshaller_KeyMessage,
+        __Marshaller_KeyValueMessage);
+
+    static readonly grpc::Method<global::Dhtproto.KeyValueMessage, global::Dhtproto.KeyValueMessage> __Method_StoreValue = new grpc::Method<global::Dhtproto.KeyValueMessage, global::Dhtproto.KeyValueMessage>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "StoreValue",
+        __Marshaller_KeyValueMessage,
+        __Marshaller_KeyValueMessage);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -33,15 +49,17 @@ namespace Dhtproto {
     /// <summary>Base class for server-side implementations of DhtProtoService</summary>
     public abstract partial class DhtProtoServiceBase
     {
-      /// <summary>
-      /// A simple RPC.
-      ///
-      /// Says hello
-      /// </summary>
-      /// <param name="request">The request received from the client.</param>
-      /// <param name="context">The context of the server-side call handler being invoked.</param>
-      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::Dhtproto.StringMessage> SayHello(global::Dhtproto.StringMessage request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Dhtproto.KeyValueMessage> GetValue(global::Dhtproto.KeyMessage request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Dhtproto.KeyValueMessage> StoreValue(global::Dhtproto.KeyValueMessage request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -71,57 +89,53 @@ namespace Dhtproto {
       {
       }
 
-      /// <summary>
-      /// A simple RPC.
-      ///
-      /// Says hello
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The response received from the server.</returns>
       public virtual global::Dhtproto.StringMessage SayHello(global::Dhtproto.StringMessage request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return SayHello(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      /// A simple RPC.
-      ///
-      /// Says hello
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The response received from the server.</returns>
       public virtual global::Dhtproto.StringMessage SayHello(global::Dhtproto.StringMessage request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_SayHello, null, options, request);
       }
-      /// <summary>
-      /// A simple RPC.
-      ///
-      /// Says hello
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::Dhtproto.StringMessage> SayHelloAsync(global::Dhtproto.StringMessage request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return SayHelloAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      /// A simple RPC.
-      ///
-      /// Says hello
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::Dhtproto.StringMessage> SayHelloAsync(global::Dhtproto.StringMessage request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_SayHello, null, options, request);
+      }
+      public virtual global::Dhtproto.KeyValueMessage GetValue(global::Dhtproto.KeyMessage request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return GetValue(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Dhtproto.KeyValueMessage GetValue(global::Dhtproto.KeyMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetValue, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Dhtproto.KeyValueMessage> GetValueAsync(global::Dhtproto.KeyMessage request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return GetValueAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Dhtproto.KeyValueMessage> GetValueAsync(global::Dhtproto.KeyMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetValue, null, options, request);
+      }
+      public virtual global::Dhtproto.KeyValueMessage StoreValue(global::Dhtproto.KeyValueMessage request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return StoreValue(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Dhtproto.KeyValueMessage StoreValue(global::Dhtproto.KeyValueMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_StoreValue, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Dhtproto.KeyValueMessage> StoreValueAsync(global::Dhtproto.KeyValueMessage request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return StoreValueAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Dhtproto.KeyValueMessage> StoreValueAsync(global::Dhtproto.KeyValueMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_StoreValue, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override DhtProtoServiceClient NewInstance(ClientBaseConfiguration configuration)
@@ -135,7 +149,9 @@ namespace Dhtproto {
     public static grpc::ServerServiceDefinition BindService(DhtProtoServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_SayHello, serviceImpl.SayHello).Build();
+          .AddMethod(__Method_SayHello, serviceImpl.SayHello)
+          .AddMethod(__Method_GetValue, serviceImpl.GetValue)
+          .AddMethod(__Method_StoreValue, serviceImpl.StoreValue).Build();
     }
 
   }
