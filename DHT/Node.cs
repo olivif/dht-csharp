@@ -60,6 +60,9 @@
             this.store.Add(key, value);
         }
 
+        /// <summary>
+        /// Find the node which should store this value
+        /// </summary>
         public Node FindNode(string value)
         {
             var key = this.hashGenerator.Hash(value);
