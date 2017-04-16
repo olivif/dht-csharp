@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Routing;
 
     /// <summary>
     /// Represents a node in the DHT
