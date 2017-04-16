@@ -1,13 +1,14 @@
-﻿namespace DHT
+﻿namespace DHT.Routing
 {
     using System;
     using System.IO;
     using System.Security.Cryptography;
     using System.Text;
+    using ArgumentValidator;
 
     public class Sha256HashGenerator : IConsistentHashGenerator
     {
-        SHA256 hasher;
+        private readonly SHA256 hasher;
 
         public Sha256HashGenerator()
         {
@@ -16,6 +17,8 @@
 
         public Int32 Hash(string value)
         {
+            Throw.IfNullOrEmpty(value, nameof(value));
+
             using (var stream = this.GenerateStreamFromString(value))
             {
                 var hashBytes = this.hasher.ComputeHash(stream);
