@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
+    using System.IO;
     using System.Linq;
     using Dhtproto;
     using Grpc.Core;
@@ -16,24 +16,20 @@
 
         static void Main(string[] args)
         {
-            // Generate nodes info
-            var nodes = GetRandomNodes(10);
-
             // Create routing table
-            var hashGenerator = new Sha256HashGenerator();
-            var routingTable = new RoutingTable(hashGenerator, nodes);
+            var routingTable = ReadRoutingTable("routingTable.txt");
 
             // Start node servers
             var servers = new List<Server>();
 
-            foreach(var node in nodes)
+            foreach(var node in routingTable.Nodes)
             {
                 var nodeServer = StartNodeServer(node, routingTable);
                 servers.Add(nodeServer);
             }
 
             // Make a get request to one of the servers
-            var testNode = nodes.First();
+            var testNode = routingTable.Nodes.First();
 
             GetValueRemote(testNode, "A");
 
@@ -106,6 +102,34 @@
             var clientResponse = client.GetValue(request);
 
             return clientResponse;
+        }
+
+        private static IRoutingTable ReadRoutingTable(string routingTablePath)
+        {
+            var lines = File.ReadAllLines(routingTablePath);
+            var nodes = new List<NodeInfo>();
+
+            foreach(var line in lines)
+            {
+                var tokens = line.Split(' ');
+                var nodeId = UInt32.Parse(tokens[0]);
+                var hostName = tokens[1];
+                var port = int.Parse(tokens[2]);
+
+                var nodeInfo = new NodeInfo()
+                {
+                    NodeId = nodeId,
+                    HostName = hostName,
+                    Port = port
+                };
+
+                nodes.Add(nodeInfo);
+            }
+
+            var hashGenerator = new Sha256HashGenerator();
+            var routingTable = new RoutingTable(hashGenerator, nodes);
+
+            return routingTable;
         }
     }
 }
