@@ -7,6 +7,7 @@
     using Grpc.Core;
     using Nodes;
     using Routing;
+    using Utils;
     using grpc = global::Grpc.Core;
 
     public class NodeServer : DhtProtoService.DhtProtoServiceBase
@@ -29,36 +30,37 @@
 
         public override Task<KeyValueMessage> GetValue(KeyMessage request, grpc.ServerCallContext context)
         {
-            Console.WriteLine("[NodeServer] GetValue");
+            Logger.Log(this.nodeInfo, "GetValue", "Start");
 
             // Find the node which should store this key, value
             KeyValueMessage response = null;
             var key = request.Key;
             var node = this.routingTable.FindNode(key);
 
+            Logger.Log(this.nodeInfo, "GetValue", "Partition node is " + node.NodeId);
+
             // If it's us, we should get it from the local store
             if (node.NodeId == this.nodeInfo.NodeId)
             {
+                var value = string.Empty;
+
+                Logger.Log(this.nodeInfo, "GetValue", "Retrieving locally");
+
                 if (this.nodeStore.ContainsKey(key))
                 {
-                    var value = this.nodeStore.GetValue(key);
-                    response = new KeyValueMessage()
-                    {
-                        Key = key,
-                        Value = value
-                    };
-                } else
+                    value = this.nodeStore.GetValue(key);
+                } 
+
+                response = new KeyValueMessage()
                 {
-                    response = new KeyValueMessage()
-                    {
-                        Key = key,
-                        Value = string.Empty
-                    };
-                }
+                    Key = key,
+                    Value = value
+                };
             }
             else
             {
                 // If it's not us, we ask that node remotely
+                Logger.Log(this.nodeInfo, "GetValue", "Retrieving remotely");
                 response = this.GetValueRemote(node, key);
             }
 
@@ -67,7 +69,7 @@
 
         public override Task<KeyValueMessage> RemoveValue(KeyMessage request, ServerCallContext context)
         {
-            Console.WriteLine("[NodeServer] RemoveValue");
+            Logger.Log(this.nodeInfo, "RemoveValue", "Start");
 
             // Find the node which should store this key, value
             KeyValueMessage response = null;
@@ -96,7 +98,7 @@
 
         public override Task<KeyValueMessage> StoreValue(KeyValueMessage request, grpc.ServerCallContext context)
         {
-            Console.WriteLine("[NodeServer] StoreValue");
+            Logger.Log(this.nodeInfo, "StoreValue", "Start");
 
             // Find the node which should store this key, value
             KeyValueMessage response = null;

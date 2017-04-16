@@ -55,6 +55,7 @@
     <Compile Include="Routing\IRoutingTable.cs" />
     <Compile Include="Routing\RoutingTable.cs" />
     <Compile Include="Routing\Sha256HashGenerator.cs" />
+    <Compile Include="Utils\Logger.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Grpc.Core, Version=1.0.1.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
