@@ -110,6 +110,11 @@
             {
                 Logger.Log(this.nodeInfo, "StoreValue", "Adding locally");
                 this.nodeStore.AddValue(key, value);
+                response = new KeyValueMessage()
+                {
+                    Key = key,
+                    Value = value
+                };
             }
             else
             {

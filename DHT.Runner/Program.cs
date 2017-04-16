@@ -8,6 +8,7 @@
     using Grpc.Core;
     using Nodes;
     using Routing;
+    using static Dhtproto.DhtProtoService;
 
     class Program
     {
@@ -48,22 +49,6 @@
                     Console.WriteLine("Unknown command");
                 }
             }
-        }
-
-        private static KeyValueMessage GetValueRemote(NodeInfo node, string key)
-        {
-            var target = string.Format("{0}:{1}", node.HostName, node.Port);
-            var channel = new Channel(target, ChannelCredentials.Insecure);
-            var client = new DhtProtoService.DhtProtoServiceClient(channel);
-
-            var request = new KeyMessage()
-            {
-                Key = key
-            };
-
-            var clientResponse = client.GetValue(request);
-
-            return clientResponse;
         }
 
         private static void StartNodeServerProcess(NodeInfo nodeInfo)
@@ -108,17 +93,61 @@
 
         private static void GetValue(string command, IList<string> args)
         {
-            Console.WriteLine("GetValue");
+            var client = GetRandomClient();
+            var request = new KeyMessage()
+            {
+                Key = args[0]
+            };
+
+            var response = client.GetValue(request);
+
+            Console.WriteLine("Got key value = {0} {1}", response.Key, response.Value);
         }
 
         private static void StoreValue(string command, IList<string> args)
         {
-            Console.WriteLine("StoreValue");
+            var client = GetRandomClient();
+            var request = new KeyValueMessage()
+            {
+                Key = args[0],
+                Value = args[1]
+            };
+
+            var response = client.StoreValue(request);
+
+            Console.WriteLine("Got key value = {0} {1}", response.Key, response.Value);
         }
 
         private static void RemoveValue(string command, IList<string> args)
         {
-            Console.WriteLine("RemoveValue");
+            var client = GetRandomClient();
+            var request = new KeyMessage()
+            {
+                Key = args[0]
+            };
+
+            var response = client.RemoveValue(request);
+
+            Console.WriteLine("Got key value = {0} {1}", response.Key, response.Value);
+        }
+
+        private static NodeInfo GetRandomNode()
+        {
+            var randomNodeIdx = random.Next(0, routingTable.Nodes.Count);
+            var randomNode = routingTable.Nodes[randomNodeIdx];
+
+            return randomNode;
+        }
+
+        private static DhtProtoServiceClient GetRandomClient()
+        {
+            var node = GetRandomNode();
+
+            var target = string.Format("{0}:{1}", node.HostName, node.Port);
+            var channel = new Channel(target, ChannelCredentials.Insecure);
+            var client = new DhtProtoServiceClient(channel);
+
+            return client;
         }
     }
 }
