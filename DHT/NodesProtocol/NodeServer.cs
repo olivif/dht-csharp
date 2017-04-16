@@ -34,41 +34,31 @@
 
         public override Task<KeyValueMessage> GetValue(KeyMessage request, grpc.ServerCallContext context)
         {
-            Logger.Log(this.nodeInfo, "GetValue", "Start");
+            KeyValueMessage response;
+            NodeInfo remoteNode;
 
-            // Find the node which should store this key, value
-            KeyValueMessage response = null;
-            var key = request.Key;
-            var node = this.routingTable.FindNode(key);
-
-            // If it's us, we should get it from the local store
-            if (node.NodeId == this.nodeInfo.NodeId)
+            if (this.IsLocalNode(request.Key, out remoteNode))
             {
-                var value = string.Empty;
-
+                // Get it from the local store
                 Logger.Log(this.nodeInfo, "GetValue", "Retrieving locally");
 
-                if (this.nodeStore.ContainsKey(key))
+                if (!this.nodeStore.ContainsKey(request.Key))
                 {
-                    value = this.nodeStore.GetValue(key);
+                    ThrowRpcException(StatusCode.NotFound, "Key not found");
                 }
-                else
-                {
-                    var status = new Status(StatusCode.NotFound, "Key not found");
-                    throw new RpcException(status);
-                }
-
+                var value = this.nodeStore.GetValue(request.Key);
                 response = new KeyValueMessage()
                 {
-                    Key = key,
+                    Key = request.Key,
                     Value = value
                 };
+
             }
             else
             {
-                // If it's not us, we ask that node remotely
+                // Get it remotely
                 Logger.Log(this.nodeInfo, "GetValue", "Retrieving remotely");
-                response = this.GetValueRemote(node, key);
+                response = this.GetValueRemote(remoteNode, request.Key);
             }
 
             return Task.FromResult(response);
@@ -160,7 +150,7 @@
 
         private KeyValueMessage GetValueRemote(NodeInfo node, string key)
         {
-            var client = this.clientFactory.CreateClient(node);
+            var client = this.clientFactory.CreateRemoteClient(node);
 
             var request = new KeyMessage()
             {
@@ -174,7 +164,7 @@
 
         private KeyValueMessage StoreValueRemote(NodeInfo node, string key, string value)
         {
-            var client = this.clientFactory.CreateClient(node);
+            var client = this.clientFactory.CreateRemoteClient(node);
 
             var request = new KeyValueMessage()
             {
@@ -189,7 +179,7 @@
 
         private KeyValueMessage RemoveValueRemote(NodeInfo node, string key)
         {
-            var client = this.clientFactory.CreateClient(node);
+            var client = this.clientFactory.CreateRemoteClient(node);
 
             var request = new KeyMessage()
             {
@@ -199,6 +189,23 @@
             var clientResponse = client.RemoveValue(request);
 
             return clientResponse;
+        }
+
+        private bool IsLocalNode(string key, out NodeInfo remoteNode)
+        {
+            // Find the node which should have this key
+            remoteNode = this.routingTable.FindNode(key);
+
+            // Return true if it's the local node
+            var isLocal = remoteNode.NodeId == this.nodeInfo.NodeId;
+
+            return isLocal;
+        }
+
+        private void ThrowRpcException(StatusCode statusCode, string message)
+        {
+            var status = new Status(statusCode, message);
+            throw new RpcException(status);
         }
     }
 }

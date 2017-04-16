@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NodesProtocol\INodeServerClientFactory.cs" />
+    <Compile Include="NodesProtocol\LocalNodeServerClient.cs" />
     <Compile Include="NodesProtocol\NodeServerClientFactory.cs" />
     <Compile Include="Nodes\INodeStore.cs" />
     <Compile Include="Nodes\NodeStore.cs" />

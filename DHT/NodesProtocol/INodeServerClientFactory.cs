@@ -5,6 +5,8 @@
 
     public interface INodeServerClientFactory
     {
-        DhtProtoServiceClient CreateClient(NodeInfo nodeInfo);
+        DhtProtoServiceClient CreateRemoteClient(NodeInfo nodeInfo);
+
+        DhtProtoServiceClient CreateLocalClient();
     }
 }
