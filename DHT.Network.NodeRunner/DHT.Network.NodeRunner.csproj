@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CF2D500F-1EBF-43EE-B8C4-4096DA5CFBA4}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{07E4BBDF-A699-417A-AE38-CE60D953680E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DHT</RootNamespace>
-    <AssemblyName>DHT</AssemblyName>
+    <RootNamespace>DHT.Network.NodeRunner</RootNamespace>
+    <AssemblyName>DHT.Network.NodeRunner</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,13 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ArgumentValidator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=32e64619b0d333b5, processorArchitecture=MSIL">
-      <HintPath>..\packages\Argument.Validator.1.0.2\lib\ArgumentValidator.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,31 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Nodes\INodeStore.cs" />
-    <Compile Include="Nodes\NodeStore.cs" />
-    <Compile Include="Routing\IConsistentHashGenerator.cs" />
-    <Compile Include="Node.cs" />
-    <Compile Include="Network\NodeServer.cs" />
-    <Compile Include="Nodes\NodeInfo.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Routing\IRoutingTable.cs" />
-    <Compile Include="Routing\RoutingTable.cs" />
-    <Compile Include="Routing\RoutingTableFactory.cs" />
-    <Compile Include="Routing\Sha256HashGenerator.cs" />
-    <Compile Include="Utils\Logger.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Grpc.Core, Version=1.0.1.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Grpc.Core.1.0.1\lib\net45\Grpc.Core.dll</HintPath>
-    </Reference>
-    <ProjectReference Include="..\DHT.ProtocolBuffers\DHT.ProtocolBuffers.csproj">
-      <Project>{76baf981-f995-4cb9-b9d5-229a822bd8ff}</Project>
-      <Name>DHT.ProtocolBuffers</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

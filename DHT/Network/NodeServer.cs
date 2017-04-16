@@ -1,6 +1,5 @@
 ﻿namespace DHT.Network
 {
-    using System;
     using System.Threading.Tasks;
     using ArgumentValidator;
     using Dhtproto;
