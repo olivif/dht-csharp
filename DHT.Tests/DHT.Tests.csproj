@@ -62,7 +62,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Nodes\NodeStoreTests.cs" />
-    <Compile Include="NodeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\RoutingTableTests.cs" />
     <Compile Include="Routing\Sha256HashGeneratorTests.cs" />

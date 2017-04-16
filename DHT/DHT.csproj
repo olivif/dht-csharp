@@ -51,7 +51,6 @@
     <Compile Include="Nodes\INodeStore.cs" />
     <Compile Include="Nodes\NodeStore.cs" />
     <Compile Include="Routing\IConsistentHashGenerator.cs" />
-    <Compile Include="Node.cs" />
     <Compile Include="NodesProtocol\NodeServer.cs" />
     <Compile Include="Nodes\NodeInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
