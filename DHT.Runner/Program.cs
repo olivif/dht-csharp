@@ -1,41 +1,88 @@
 ﻿namespace DHT.Runner
 {
     using System;
+    using System.Collections.Generic;
     using Dhtproto;
     using Grpc.Core;
     using Network;
+    using Nodes;
+    using Routing;
 
     class Program
     {
+        private static Random random = new Random();
+
         static void Main(string[] args)
         {
-            var port = int.Parse(args[0]);
+            // Generate nodes info
+            var nodes = GetRandomNodes(10);
 
-            var server = new Server
+            // Create routing table
+            var hashGenerator = new Sha256HashGenerator();
+            var routingTable = new RoutingTable(hashGenerator, nodes);
+
+            // Start node servers
+            var servers = new List<Server>();
+
+            foreach(var node in nodes)
             {
-                Services = { Dhtproto.DhtProtoService.BindService(new NodeServer(new Nodes.NodeInfo(), new Routing.RoutingTable(new Routing.Sha256HashGenerator()))) },
-                Ports = { new ServerPort("localhost", port, ServerCredentials.Insecure) }
-            };
-
-            server.Start();
-
-            Console.WriteLine("NodeServer server listening on port " + port);
-            Console.WriteLine();
-
-            var channel = new Channel(string.Format("127.0.0.1:{0}", port), ChannelCredentials.Insecure);
-            var client = new DhtProtoService.DhtProtoServiceClient(channel);
-
-            var request = new StringMessage()
-            {
-                Message = "Hello!"
-            };
-            var response = client.SayHello(request);
-            Console.WriteLine("Sent {0} Server replied with {1} ", request.Message, response.Message);
+                var nodeServer = StartNodeServer(node, routingTable);
+                servers.Add(nodeServer);
+            }
 
             Console.WriteLine("Press any key to stop the server...");
             Console.ReadLine();
 
-            server.ShutdownAsync().Wait();
+            foreach (var nodeServer in servers)
+            {
+                KillNodeServer(nodeServer);
+            }
+
+            Console.WriteLine("All done.");
+        }
+
+        private static IList<NodeInfo> GetRandomNodes(int numberOfNodes)
+        {
+            var nodes = new List<NodeInfo>();
+            var port = 11000;
+
+            for (int nodeIdx = 0; nodeIdx < numberOfNodes; nodeIdx++)
+            {
+                var randomNodeId = random.Next();
+                var nodeInfo = new NodeInfo()
+                {
+                    NodeId = randomNodeId,
+                    HostName = "localhost",
+                    Port = port++
+                };
+
+                nodes.Add(nodeInfo);
+            }
+
+            return nodes;
+        }
+
+        private static Server StartNodeServer(NodeInfo node, IRoutingTable routingTable)
+        {
+            var nodeServer = new NodeServer(node, routingTable);
+
+            var server = new Server
+            {
+                Services = { Dhtproto.DhtProtoService.BindService(nodeServer) },
+                Ports = { new ServerPort(node.HostName, node.Port, ServerCredentials.Insecure) }
+            };
+
+            server.Start();
+
+            Console.WriteLine("NodeServer server listening on {0}:{1} ", node.HostName, node.Port);
+            Console.WriteLine();
+
+            return server;
+        }
+
+        private static void KillNodeServer(Server nodeServer)
+        {
+            nodeServer.ShutdownAsync().Wait();
         }
     }
 }

@@ -11,12 +11,21 @@
     /// </summary>
     public class RoutingTable : IRoutingTable
     {
+        private IList<NodeInfo> nodes;
+
         private readonly IConsistentHashGenerator hashGenerator;
 
         public RoutingTable(IConsistentHashGenerator hashGenerator)
+            : this(hashGenerator, new List<NodeInfo>())
         {
+        }
+
+        public RoutingTable(IConsistentHashGenerator hashGenerator, IList<NodeInfo> nodes)
+        {
+            Throw.IfNull(nodes, nameof(nodes));
             Throw.IfNull(hashGenerator, nameof(hashGenerator));
 
+            this.nodes = nodes;
             this.hashGenerator = hashGenerator;
         }
 
@@ -28,7 +37,17 @@
             }
         }
 
-        public IList<NodeInfo> Nodes { get; set; }
+        public IList<NodeInfo> Nodes
+        {
+            get
+            {
+                return this.nodes;
+            }
+            set
+            {
+                this.nodes = value;
+            }
+        }
 
         public NodeInfo FindNode(string key)
         {
