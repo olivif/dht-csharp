@@ -18,13 +18,17 @@
 
         private readonly IRoutingTable routingTable;
 
-        public NodeServer(NodeInfo nodeInfo, IRoutingTable routingTable)
+        private readonly INodeServerClientFactory clientFactory;
+
+        public NodeServer(NodeInfo nodeInfo, IRoutingTable routingTable, INodeServerClientFactory clientFactory)
         {
             Throw.IfNull(nodeInfo, nameof(nodeInfo));
             Throw.IfNull(routingTable, nameof(routingTable));
+            Throw.IfNull(clientFactory, nameof(clientFactory));
 
             this.nodeInfo = nodeInfo;
             this.routingTable = routingTable;
+            this.clientFactory = clientFactory;
             this.nodeStore = new NodeStore();
         }
 
@@ -156,9 +160,7 @@
 
         private KeyValueMessage GetValueRemote(NodeInfo node, string key)
         {
-            var target = string.Format("{0}:{1}", node.HostName, node.Port);
-            var channel = new Channel(target, ChannelCredentials.Insecure);
-            var client = new DhtProtoService.DhtProtoServiceClient(channel);
+            var client = this.clientFactory.CreateClient(node);
 
             var request = new KeyMessage()
             {
@@ -172,9 +174,7 @@
 
         private KeyValueMessage StoreValueRemote(NodeInfo node, string key, string value)
         {
-            var target = string.Format("{0}:{1}", node.HostName, node.Port);
-            var channel = new Channel(target, ChannelCredentials.Insecure);
-            var client = new DhtProtoService.DhtProtoServiceClient(channel);
+            var client = this.clientFactory.CreateClient(node);
 
             var request = new KeyValueMessage()
             {
@@ -189,9 +189,7 @@
 
         private KeyValueMessage RemoveValueRemote(NodeInfo node, string key)
         {
-            var target = string.Format("{0}:{1}", node.HostName, node.Port);
-            var channel = new Channel(target, ChannelCredentials.Insecure);
-            var client = new DhtProtoService.DhtProtoServiceClient(channel);
+            var client = this.clientFactory.CreateClient(node);
 
             var request = new KeyMessage()
             {

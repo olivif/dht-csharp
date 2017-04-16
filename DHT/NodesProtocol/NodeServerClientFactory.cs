@@ -4,7 +4,7 @@
     using Dhtproto;
     using Grpc.Core;
 
-    class NodeServerClientFactory : INodeServerClientFactory
+    public class NodeServerClientFactory : INodeServerClientFactory
     {
         public DhtProtoService.DhtProtoServiceClient CreateClient(NodeInfo nodeInfo)
         {

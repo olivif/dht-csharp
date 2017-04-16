@@ -29,7 +29,7 @@
 
         private static Server StartNodeServer(NodeInfo node, IRoutingTable routingTable)
         {
-            var nodeServer = new NodeServer(node, routingTable);
+            var nodeServer = new NodeServer(node, routingTable, new NodeServerClientFactory());
 
             var server = new Server
             {
