@@ -27,16 +27,6 @@
             this.nodeStore = new NodeStore();
         }
 
-        public override Task<StringMessage> SayHello(StringMessage request, grpc::ServerCallContext context)
-        {
-            var stringMessage = new StringMessage()
-            {
-                Message = "Received " + request.Message
-            };
-
-            return Task.FromResult<StringMessage>(stringMessage);
-        }
-
         public override Task<KeyValueMessage> GetValue(KeyMessage request, grpc.ServerCallContext context)
         {
             // Find the node which should store this key, value
