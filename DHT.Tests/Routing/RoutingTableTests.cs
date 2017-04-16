@@ -18,6 +18,7 @@
 
         private IRoutingTable routingTableRealHash;
 
+        [TestInitialize]
         public void TestInit()
         {
             // Setup routingTableMockHash
