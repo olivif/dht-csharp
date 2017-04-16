@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using Dhtproto;
@@ -24,68 +25,8 @@
 
             foreach(var node in routingTable.Nodes)
             {
-                var nodeServer = StartNodeServer(node, routingTable);
-                servers.Add(nodeServer);
+                StartNodeServerProcess(node);
             }
-
-            // Make a get request to one of the servers
-            var testNode = routingTable.Nodes.First();
-
-            GetValueRemote(testNode, "A");
-
-            Console.WriteLine("Press any key to stop the server...");
-            Console.ReadLine();
-
-            foreach (var nodeServer in servers)
-            {
-                KillNodeServer(nodeServer);
-            }
-
-            Console.WriteLine("All done.");
-        }
-
-        private static IList<NodeInfo> GetRandomNodes(int numberOfNodes)
-        {
-            var nodes = new List<NodeInfo>();
-            var port = 11000;
-
-            for (int nodeIdx = 0; nodeIdx < numberOfNodes; nodeIdx++)
-            {
-                var randomNodeId = (UInt32)random.Next(0, Int32.MaxValue);
-                var nodeInfo = new NodeInfo()
-                {
-                    NodeId = randomNodeId,
-                    HostName = "localhost",
-                    Port = port++
-                };
-
-                nodes.Add(nodeInfo);
-            }
-
-            return nodes;
-        }
-
-        private static Server StartNodeServer(NodeInfo node, IRoutingTable routingTable)
-        {
-            var nodeServer = new NodeServer(node, routingTable);
-
-            var server = new Server
-            {
-                Services = { Dhtproto.DhtProtoService.BindService(nodeServer) },
-                Ports = { new ServerPort(node.HostName, node.Port, ServerCredentials.Insecure) }
-            };
-
-            server.Start();
-
-            Console.WriteLine("NodeServer server listening on {0}:{1} ", node.HostName, node.Port);
-            Console.WriteLine();
-
-            return server;
-        }
-
-        private static void KillNodeServer(Server nodeServer)
-        {
-            nodeServer.ShutdownAsync().Wait();
         }
 
         private static KeyValueMessage GetValueRemote(NodeInfo node, string key)
@@ -102,6 +43,14 @@
             var clientResponse = client.GetValue(request);
 
             return clientResponse;
+        }
+
+        private static void StartNodeServerProcess(NodeInfo nodeInfo)
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = "DHT.Network.NodeRunner.exe";
+            p.StartInfo.Arguments = nodeInfo.NodeId.ToString();
+            p.Start();
         }
     }
 }
