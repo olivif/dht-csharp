@@ -49,6 +49,8 @@
     <Compile Include="NodeServer.cs" />
     <Compile Include="Nodes\NodeInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routing\IRoutingTable.cs" />
+    <Compile Include="Routing\RoutingTable.cs" />
     <Compile Include="Routing\Sha256HashGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
