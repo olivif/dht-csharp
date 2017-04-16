@@ -3,6 +3,7 @@
     using System;
     using Dhtproto;
     using Grpc.Core;
+    using Network;
 
     class Program
     {
@@ -12,7 +13,7 @@
 
             var server = new Server
             {
-                Services = { Dhtproto.DhtProtoService.BindService(new NodeServer()) },
+                Services = { Dhtproto.DhtProtoService.BindService(new NodeServer(new Nodes.NodeInfo(), new Routing.RoutingTable())) },
                 Ports = { new ServerPort("localhost", port, ServerCredentials.Insecure) }
             };
 
