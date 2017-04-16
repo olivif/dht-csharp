@@ -1,6 +1,6 @@
 ﻿namespace DHT.Network
 {
-    using System.Collections.Generic;
+    using System;
     using System.Threading.Tasks;
     using ArgumentValidator;
     using Dhtproto;
@@ -29,6 +29,8 @@
 
         public override Task<KeyValueMessage> GetValue(KeyMessage request, grpc.ServerCallContext context)
         {
+            Console.WriteLine("[NodeServer] GetValue");
+
             // Find the node which should store this key, value
             KeyValueMessage response = null;
             var key = request.Key;
@@ -45,6 +47,13 @@
                         Key = key,
                         Value = value
                     };
+                } else
+                {
+                    response = new KeyValueMessage()
+                    {
+                        Key = key,
+                        Value = string.Empty
+                    };
                 }
             }
             else
@@ -58,6 +67,8 @@
 
         public override Task<KeyValueMessage> RemoveValue(KeyMessage request, ServerCallContext context)
         {
+            Console.WriteLine("[NodeServer] RemoveValue");
+
             // Find the node which should store this key, value
             KeyValueMessage response = null;
             var key = request.Key;
@@ -85,6 +96,8 @@
 
         public override Task<KeyValueMessage> StoreValue(KeyValueMessage request, grpc.ServerCallContext context)
         {
+            Console.WriteLine("[NodeServer] StoreValue");
+
             // Find the node which should store this key, value
             KeyValueMessage response = null;
             var key = request.Key;

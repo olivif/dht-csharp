@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
     using Dhtproto;
     using Grpc.Core;
     using Network;
@@ -29,6 +31,11 @@
                 var nodeServer = StartNodeServer(node, routingTable);
                 servers.Add(nodeServer);
             }
+
+            // Make a get request to one of the servers
+            var testNode = nodes.First();
+
+            GetValueRemote(testNode, "A");
 
             Console.WriteLine("Press any key to stop the server...");
             Console.ReadLine();
@@ -83,6 +90,22 @@
         private static void KillNodeServer(Server nodeServer)
         {
             nodeServer.ShutdownAsync().Wait();
+        }
+
+        private static KeyValueMessage GetValueRemote(NodeInfo node, string key)
+        {
+            var target = string.Format("{0}:{1}", node.HostName, node.Port);
+            var channel = new Channel(target, ChannelCredentials.Insecure);
+            var client = new DhtProtoService.DhtProtoServiceClient(channel);
+
+            var request = new KeyMessage()
+            {
+                Key = key
+            };
+
+            var clientResponse = client.GetValue(request);
+
+            return clientResponse;
         }
     }
 }
