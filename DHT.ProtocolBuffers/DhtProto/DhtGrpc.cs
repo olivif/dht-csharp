@@ -40,6 +40,13 @@ namespace Dhtproto {
         __Marshaller_KeyValueMessage,
         __Marshaller_KeyValueMessage);
 
+    static readonly grpc::Method<global::Dhtproto.KeyMessage, global::Dhtproto.KeyValueMessage> __Method_RemoveValue = new grpc::Method<global::Dhtproto.KeyMessage, global::Dhtproto.KeyValueMessage>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "RemoveValue",
+        __Marshaller_KeyMessage,
+        __Marshaller_KeyValueMessage);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -60,6 +67,11 @@ namespace Dhtproto {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Dhtproto.KeyValueMessage> StoreValue(global::Dhtproto.KeyValueMessage request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Dhtproto.KeyValueMessage> RemoveValue(global::Dhtproto.KeyMessage request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -137,6 +149,22 @@ namespace Dhtproto {
       {
         return CallInvoker.AsyncUnaryCall(__Method_StoreValue, null, options, request);
       }
+      public virtual global::Dhtproto.KeyValueMessage RemoveValue(global::Dhtproto.KeyMessage request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return RemoveValue(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Dhtproto.KeyValueMessage RemoveValue(global::Dhtproto.KeyMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_RemoveValue, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Dhtproto.KeyValueMessage> RemoveValueAsync(global::Dhtproto.KeyMessage request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return RemoveValueAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Dhtproto.KeyValueMessage> RemoveValueAsync(global::Dhtproto.KeyMessage request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_RemoveValue, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override DhtProtoServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -151,7 +179,8 @@ namespace Dhtproto {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_SayHello, serviceImpl.SayHello)
           .AddMethod(__Method_GetValue, serviceImpl.GetValue)
-          .AddMethod(__Method_StoreValue, serviceImpl.StoreValue).Build();
+          .AddMethod(__Method_StoreValue, serviceImpl.StoreValue)
+          .AddMethod(__Method_RemoveValue, serviceImpl.RemoveValue).Build();
     }
 
   }
