@@ -141,7 +141,7 @@
             try
             {
                 var response = client.RemoveValue(request);
-                Console.WriteLine("Success: Got key value = {0} {1}", response.Key, response.Value);
+                Console.WriteLine("Success: Got key value = {0}", response.Key);
             }
             catch (RpcException e)
             {

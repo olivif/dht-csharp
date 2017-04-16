@@ -39,6 +39,7 @@
       <HintPath>..\packages\Castle.Core.4.0.0\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Grpc.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad" />
     <Reference Include="Moq, Version=4.7.8.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.7.8\lib\net45\Moq.dll</HintPath>
       <Private>True</Private>
@@ -61,13 +62,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="NodesProtocol\NodeServerClientFactoryTests.cs" />
+    <Compile Include="NodesProtocol\LocalNodeServerClientTests.cs" />
     <Compile Include="Nodes\NodeStoreTests.cs" />
-    <Compile Include="NodeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\RoutingTableTests.cs" />
     <Compile Include="Routing\Sha256HashGeneratorTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DHT.ProtocolBuffers\DHT.ProtocolBuffers.csproj">
+      <Project>{76BAF981-F995-4CB9-B9D5-229A822BD8FF}</Project>
+      <Name>DHT.ProtocolBuffers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DHT\DHT.csproj">
       <Project>{cf2d500f-1ebf-43ee-b8c4-4096da5cfba4}</Project>
       <Name>DHT</Name>
