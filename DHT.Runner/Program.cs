@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using Dhtproto;
     using Grpc.Core;
     using Nodes;
@@ -18,22 +19,29 @@
        
         static void Main(string[] args)
         {
-            var commands = new Dictionary<string, Action<string>>()
+            var commands = new Dictionary<string, Action<string, IList<string>>>()
             {
                 { "help", Help },
                 { "start", Start },
                 { "stop", Stop },
+                { "getValue", GetValue },
+                { "storeValue", StoreValue },
+                { "removeValue", RemoveValue },
             };
 
             // Main networking management loop
             while (true)
             {
                 var line = Console.ReadLine();
+                var lineArgs = line.Split(' ').ToList();
+                var command = lineArgs[0];
 
-                if (commands.ContainsKey(line))
+                lineArgs.RemoveAt(0);
+
+                if (commands.ContainsKey(command))
                 {
-                    var command = commands[line];
-                    command(line);
+                    var commandFunc = commands[command];
+                    commandFunc(command, lineArgs);
                 }
                 else
                 {
@@ -69,12 +77,12 @@
             processes.Add(p);
         }
 
-        private static void Help(string command)
+        private static void Help(string command, IList<string> args)
         {
             Console.WriteLine("Help command run");
         }
 
-        private static void Start(string command)
+        private static void Start(string command, IList<string> args)
         {
             // Start node servers
             var servers = new List<Server>();
@@ -85,7 +93,7 @@
             }
         }
 
-        private static void Stop(string command)
+        private static void Stop(string command, IList<string> args)
         {
             // Start node servers
             var servers = new List<Server>();
@@ -96,6 +104,21 @@
             }
 
             processes.Clear();
+        }
+
+        private static void GetValue(string command, IList<string> args)
+        {
+            Console.WriteLine("GetValue");
+        }
+
+        private static void StoreValue(string command, IList<string> args)
+        {
+            Console.WriteLine("StoreValue");
+        }
+
+        private static void RemoveValue(string command, IList<string> args)
+        {
+            Console.WriteLine("RemoveValue");
         }
     }
 }
