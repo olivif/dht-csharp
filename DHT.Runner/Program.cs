@@ -99,9 +99,15 @@
                 Key = args[0]
             };
 
-            var response = client.GetValue(request);
-
-            Console.WriteLine("Got key value = {0} {1}", response.Key, response.Value);
+            try
+            {
+                var response = client.GetValue(request);
+                Console.WriteLine("Success: Got key value = {0} {1}", response.Key, response.Value);
+            }
+            catch (RpcException e)
+            {
+                Console.WriteLine("Error: {0} {1} ", e.Status.StatusCode, e.Status.Detail);
+            }
         }
 
         private static void StoreValue(string command, IList<string> args)
@@ -113,9 +119,15 @@
                 Value = args[1]
             };
 
-            var response = client.StoreValue(request);
-
-            Console.WriteLine("Got key value = {0} {1}", response.Key, response.Value);
+            try
+            {
+                var response = client.StoreValue(request);
+                Console.WriteLine("Success: Got key value = {0} {1}", response.Key, response.Value);
+            }
+            catch (RpcException e)
+            {
+                Console.WriteLine("Error: {0} {1} ", e.Status.StatusCode, e.Status.Detail);
+            }
         }
 
         private static void RemoveValue(string command, IList<string> args)
@@ -126,10 +138,16 @@
                 Key = args[0]
             };
 
-            var response = client.RemoveValue(request);
-
-            Console.WriteLine("Got key value = {0} {1}", response.Key, response.Value);
-        }
+            try
+            {
+                var response = client.RemoveValue(request);
+                Console.WriteLine("Success: Got key value = {0} {1}", response.Key, response.Value);
+            }
+            catch (RpcException e)
+            {
+                Console.WriteLine("Error: {0} {1} ", e.Status.StatusCode, e.Status.Detail);
+            }
+        }   
 
         private static NodeInfo GetRandomNode()
         {

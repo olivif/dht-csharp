@@ -1,5 +1,6 @@
 ﻿namespace DHT.Network
 {
+    using System.Data.Linq;
     using System.Threading.Tasks;
     using ArgumentValidator;
     using Dhtproto;
@@ -46,7 +47,12 @@
                 if (this.nodeStore.ContainsKey(key))
                 {
                     value = this.nodeStore.GetValue(key);
-                } 
+                }
+                else
+                {
+                    var status = new Status(StatusCode.NotFound, "Key not found");
+                    throw new RpcException(status);
+                }
 
                 response = new KeyValueMessage()
                 {
@@ -79,6 +85,12 @@
                 Logger.Log(this.nodeInfo, "RemoveValue", "Removing locally");
                 var removed = this.nodeStore.RemoveValue(key);
 
+                if (!removed)
+                {
+                    var status = new Status(StatusCode.NotFound, "Key not found, can't remove.");
+                    throw new RpcException(status);
+                }
+
                 response = new KeyValueMessage()
                 {
                     Key = key,
@@ -109,7 +121,23 @@
             if (node.NodeId == this.nodeInfo.NodeId)
             {
                 Logger.Log(this.nodeInfo, "StoreValue", "Adding locally");
-                this.nodeStore.AddValue(key, value);
+
+                try
+                {
+                    var added = this.nodeStore.AddValue(key, value);
+
+                    if (!added)
+                    {
+                        var status = new Status(StatusCode.Internal, "Couldn't store value.");
+                        throw new RpcException(status);
+                    }
+                }
+                catch (DuplicateKeyException)
+                {
+                    var status = new Status(StatusCode.AlreadyExists, "Duplicate key found.");
+                    throw new RpcException(status);
+                }
+
                 response = new KeyValueMessage()
                 {
                     Key = key,
