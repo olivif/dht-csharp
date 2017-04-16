@@ -66,6 +66,33 @@
             return Task.FromResult(response);
         }
 
+        public override Task<KeyValueMessage> RemoveValue(KeyMessage request, ServerCallContext context)
+        {
+            // Find the node which should store this key, value
+            KeyValueMessage response = null;
+            var key = request.Key;
+            var node = this.routingTable.FindNode(key);
+
+            // If it's us, we should get it from the local store
+            if (node.NodeId == this.nodeInfo.NodeId)
+            {
+                var removed = this.nodeStore.RemoveValue(key);
+
+                response = new KeyValueMessage()
+                {
+                    Key = key,
+                    Value = removed ? "removed" : "not removed"
+                };
+            }
+            else
+            {
+                // If it's not us, we ask that node to remove it remotely
+                response = this.RemoveValueRemote(node, key);
+            }
+
+            return Task.FromResult(response);
+        }
+
         public override Task<KeyValueMessage> StoreValue(KeyValueMessage request, grpc.ServerCallContext context)
         {
             // Find the node which should store this key, value
@@ -117,6 +144,22 @@
             };
 
             var clientResponse = client.StoreValue(request);
+
+            return clientResponse;
+        }
+
+        private KeyValueMessage RemoveValueRemote(NodeInfo node, string key)
+        {
+            var target = string.Format("{0}:{1}", node.HostName, node.Port);
+            var channel = new Channel(target, ChannelCredentials.Insecure);
+            var client = new DhtProtoService.DhtProtoServiceClient(channel);
+
+            var request = new KeyMessage()
+            {
+                Key = key
+            };
+
+            var clientResponse = client.RemoveValue(request);
 
             return clientResponse;
         }

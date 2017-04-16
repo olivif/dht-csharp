@@ -22,21 +22,18 @@ namespace Dhtproto {
     static DhtReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CglkaHQucHJvdG8SCGRodHByb3RvIiAKDVN0cmluZ01lc3NhZ2USDwoHbWVz",
-            "c2FnZRgBIAEoCSIZCgpLZXlNZXNzYWdlEgsKA2tleRgBIAEoCSItCg9LZXlW",
-            "YWx1ZU1lc3NhZ2USCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJMpgCCg9E",
-            "aHRQcm90b1NlcnZpY2USPgoIU2F5SGVsbG8SFy5kaHRwcm90by5TdHJpbmdN",
-            "ZXNzYWdlGhcuZGh0cHJvdG8uU3RyaW5nTWVzc2FnZSIAEj0KCEdldFZhbHVl",
-            "EhQuZGh0cHJvdG8uS2V5TWVzc2FnZRoZLmRodHByb3RvLktleVZhbHVlTWVz",
-            "c2FnZSIAEkQKClN0b3JlVmFsdWUSGS5kaHRwcm90by5LZXlWYWx1ZU1lc3Nh",
-            "Z2UaGS5kaHRwcm90by5LZXlWYWx1ZU1lc3NhZ2UiABJACgtSZW1vdmVWYWx1",
-            "ZRIULmRodHByb3RvLktleU1lc3NhZ2UaGS5kaHRwcm90by5LZXlWYWx1ZU1l",
-            "c3NhZ2UiAEI4Chtpby5ncnBjLmV4YW1wbGVzLnJvdXRlZ3VpZGVCEUhlbGxv",
-            "U2VydmljZVByb3RvUAGiAgNSVEdiBnByb3RvMw=="));
+            "CglkaHQucHJvdG8SCGRodHByb3RvIhkKCktleU1lc3NhZ2USCwoDa2V5GAEg",
+            "ASgJIi0KD0tleVZhbHVlTWVzc2FnZRILCgNrZXkYASABKAkSDQoFdmFsdWUY",
+            "AiABKAky2AEKD0RodFByb3RvU2VydmljZRI9CghHZXRWYWx1ZRIULmRodHBy",
+            "b3RvLktleU1lc3NhZ2UaGS5kaHRwcm90by5LZXlWYWx1ZU1lc3NhZ2UiABJE",
+            "CgpTdG9yZVZhbHVlEhkuZGh0cHJvdG8uS2V5VmFsdWVNZXNzYWdlGhkuZGh0",
+            "cHJvdG8uS2V5VmFsdWVNZXNzYWdlIgASQAoLUmVtb3ZlVmFsdWUSFC5kaHRw",
+            "cm90by5LZXlNZXNzYWdlGhkuZGh0cHJvdG8uS2V5VmFsdWVNZXNzYWdlIgBC",
+            "OAobaW8uZ3JwYy5leGFtcGxlcy5yb3V0ZWd1aWRlQhFIZWxsb1NlcnZpY2VQ",
+            "cm90b1ABogIDUlRHYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Dhtproto.StringMessage), global::Dhtproto.StringMessage.Parser, new[]{ "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Dhtproto.KeyMessage), global::Dhtproto.KeyMessage.Parser, new[]{ "Key" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Dhtproto.KeyValueMessage), global::Dhtproto.KeyValueMessage.Parser, new[]{ "Key", "Value" }, null, null, null)
           }));
@@ -45,123 +42,6 @@ namespace Dhtproto {
 
   }
   #region Messages
-  public sealed partial class StringMessage : pb::IMessage<StringMessage> {
-    private static readonly pb::MessageParser<StringMessage> _parser = new pb::MessageParser<StringMessage>(() => new StringMessage());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<StringMessage> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Dhtproto.DhtReflection.Descriptor.MessageTypes[0]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public StringMessage() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public StringMessage(StringMessage other) : this() {
-      message_ = other.message_;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public StringMessage Clone() {
-      return new StringMessage(this);
-    }
-
-    /// <summary>Field number for the "message" field.</summary>
-    public const int MessageFieldNumber = 1;
-    private string message_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Message {
-      get { return message_; }
-      set {
-        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as StringMessage);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(StringMessage other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Message != other.Message) return false;
-      return true;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Message.Length != 0) hash ^= Message.GetHashCode();
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (Message.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Message);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Message.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(StringMessage other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Message.Length != 0) {
-        Message = other.Message;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            input.SkipLastField();
-            break;
-          case 10: {
-            Message = input.ReadString();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
   public sealed partial class KeyMessage : pb::IMessage<KeyMessage> {
     private static readonly pb::MessageParser<KeyMessage> _parser = new pb::MessageParser<KeyMessage>(() => new KeyMessage());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -169,7 +49,7 @@ namespace Dhtproto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Dhtproto.DhtReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Dhtproto.DhtReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -286,7 +166,7 @@ namespace Dhtproto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Dhtproto.DhtReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Dhtproto.DhtReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

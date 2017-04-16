@@ -15,16 +15,8 @@ namespace Dhtproto {
   {
     static readonly string __ServiceName = "dhtproto.DhtProtoService";
 
-    static readonly grpc::Marshaller<global::Dhtproto.StringMessage> __Marshaller_StringMessage = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Dhtproto.StringMessage.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Dhtproto.KeyMessage> __Marshaller_KeyMessage = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Dhtproto.KeyMessage.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Dhtproto.KeyValueMessage> __Marshaller_KeyValueMessage = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Dhtproto.KeyValueMessage.Parser.ParseFrom);
-
-    static readonly grpc::Method<global::Dhtproto.StringMessage, global::Dhtproto.StringMessage> __Method_SayHello = new grpc::Method<global::Dhtproto.StringMessage, global::Dhtproto.StringMessage>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "SayHello",
-        __Marshaller_StringMessage,
-        __Marshaller_StringMessage);
 
     static readonly grpc::Method<global::Dhtproto.KeyMessage, global::Dhtproto.KeyValueMessage> __Method_GetValue = new grpc::Method<global::Dhtproto.KeyMessage, global::Dhtproto.KeyValueMessage>(
         grpc::MethodType.Unary,
@@ -56,11 +48,6 @@ namespace Dhtproto {
     /// <summary>Base class for server-side implementations of DhtProtoService</summary>
     public abstract partial class DhtProtoServiceBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::Dhtproto.StringMessage> SayHello(global::Dhtproto.StringMessage request, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
       public virtual global::System.Threading.Tasks.Task<global::Dhtproto.KeyValueMessage> GetValue(global::Dhtproto.KeyMessage request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -101,22 +88,6 @@ namespace Dhtproto {
       {
       }
 
-      public virtual global::Dhtproto.StringMessage SayHello(global::Dhtproto.StringMessage request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
-      {
-        return SayHello(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual global::Dhtproto.StringMessage SayHello(global::Dhtproto.StringMessage request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_SayHello, null, options, request);
-      }
-      public virtual grpc::AsyncUnaryCall<global::Dhtproto.StringMessage> SayHelloAsync(global::Dhtproto.StringMessage request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
-      {
-        return SayHelloAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncUnaryCall<global::Dhtproto.StringMessage> SayHelloAsync(global::Dhtproto.StringMessage request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_SayHello, null, options, request);
-      }
       public virtual global::Dhtproto.KeyValueMessage GetValue(global::Dhtproto.KeyMessage request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return GetValue(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -177,7 +148,6 @@ namespace Dhtproto {
     public static grpc::ServerServiceDefinition BindService(DhtProtoServiceBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_SayHello, serviceImpl.SayHello)
           .AddMethod(__Method_GetValue, serviceImpl.GetValue)
           .AddMethod(__Method_StoreValue, serviceImpl.StoreValue)
           .AddMethod(__Method_RemoveValue, serviceImpl.RemoveValue).Build();
