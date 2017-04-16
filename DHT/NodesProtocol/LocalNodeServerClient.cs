@@ -31,7 +31,7 @@
             return response;
         }
 
-        public override KeyValueMessage RemoveValue(KeyMessage request, CallOptions options)
+        public override KeyMessage RemoveValue(KeyMessage request, CallOptions options)
         {
             var removed = this.nodeStore.RemoveValue(request.Key);
 
@@ -40,10 +40,9 @@
                 ThrowRpcException(StatusCode.NotFound, "Key not found, can't remove.");
             }
 
-            var response = new KeyValueMessage()
+            var response = new KeyMessage()
             {
-                Key = request.Key,
-                Value = removed ? "removed" : "not removed"
+                Key = request.Key
             };
 
             return response;

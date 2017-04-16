@@ -14,7 +14,7 @@ service DhtProtoService {
  
   rpc StoreValue(KeyValueMessage) returns (KeyValueMessage) {}
 
-  rpc RemoveValue(KeyMessage) returns (KeyValueMessage) {}
+  rpc RemoveValue(KeyMessage) returns (KeyMessage) {}
 }
 
 message KeyMessage {

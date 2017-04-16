@@ -39,7 +39,7 @@
             return Task.FromResult(response);
         }
 
-        public override Task<KeyValueMessage> RemoveValue(KeyMessage request, ServerCallContext context)
+        public override Task<KeyMessage> RemoveValue(KeyMessage request, ServerCallContext context)
         {
             var client = this.GetClient(request.Key);
             var response = client.RemoveValue(request);
