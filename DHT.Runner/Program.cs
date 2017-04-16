@@ -13,7 +13,7 @@
 
             var server = new Server
             {
-                Services = { Dhtproto.DhtProtoService.BindService(new NodeServer(new Nodes.NodeInfo(), new Routing.RoutingTable())) },
+                Services = { Dhtproto.DhtProtoService.BindService(new NodeServer(new Nodes.NodeInfo(), new Routing.RoutingTable(new Routing.Sha256HashGenerator()))) },
                 Ports = { new ServerPort("localhost", port, ServerCredentials.Insecure) }
             };
 
