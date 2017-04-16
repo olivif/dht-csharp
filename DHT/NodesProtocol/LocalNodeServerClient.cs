@@ -1,17 +1,25 @@
 ﻿namespace DHT.NodesProtocol
 {
     using System.Data.Linq;
+    using ArgumentValidator;
     using Dhtproto;
     using Grpc.Core;
     using Nodes;
 
     public class LocalNodeServerClient : DhtProtoService.DhtProtoServiceClient
     {
-        private readonly NodeStore nodeStore;
+        private readonly INodeStore nodeStore;
+
+        public LocalNodeServerClient(INodeStore nodeStore)
+        {
+            Throw.IfNull(nodeStore, nameof(nodeStore));
+
+            this.nodeStore = nodeStore;
+        }
 
         public LocalNodeServerClient()
+            : this(new NodeStore())
         {
-            this.nodeStore = new NodeStore();
         }
 
         public override KeyValueMessage GetValue(KeyMessage request, CallOptions options)
