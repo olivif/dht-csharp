@@ -5,6 +5,14 @@
 
     public static class Logger
     {
+        public static void Log(string method, string message)
+        {
+            Console.WriteLine("[{0}] {1} {2}",
+                DateTime.UtcNow.ToString(),
+                method,
+                message);
+        }
+
         public static void Log(NodeInfo nodeInfo, string method, string message)
         {
             Console.WriteLine("[{0}][{1}][{2}:{3}] {4}", 

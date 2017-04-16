@@ -37,8 +37,6 @@
             var key = request.Key;
             var node = this.routingTable.FindNode(key);
 
-            Logger.Log(this.nodeInfo, "GetValue", "Partition node is " + node.NodeId);
-
             // If it's us, we should get it from the local store
             if (node.NodeId == this.nodeInfo.NodeId)
             {
@@ -79,6 +77,7 @@
             // If it's us, we should get it from the local store
             if (node.NodeId == this.nodeInfo.NodeId)
             {
+                Logger.Log(this.nodeInfo, "RemoveValue", "Removing locally");
                 var removed = this.nodeStore.RemoveValue(key);
 
                 response = new KeyValueMessage()
@@ -90,6 +89,7 @@
             else
             {
                 // If it's not us, we ask that node to remove it remotely
+                Logger.Log(this.nodeInfo, "RemoveValue", "Removing remotely");
                 response = this.RemoveValueRemote(node, key);
             }
 
@@ -109,11 +109,13 @@
             // If it's us, we should store it in the local store
             if (node.NodeId == this.nodeInfo.NodeId)
             {
+                Logger.Log(this.nodeInfo, "StoreValue", "Adding locally");
                 this.nodeStore.AddValue(key, value);
             }
             else
             {
                 // If it's not us, we store in that node remotely
+                Logger.Log(this.nodeInfo, "StoreValue", "Adding remotely");
                 response = this.StoreValueRemote(node, key, value);
             }
 

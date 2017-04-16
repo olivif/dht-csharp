@@ -55,7 +55,7 @@
 
             for (int nodeIdx = 0; nodeIdx < numberOfNodes; nodeIdx++)
             {
-                var randomNodeId = random.Next();
+                var randomNodeId = (UInt32)random.Next(0, Int32.MaxValue);
                 var nodeInfo = new NodeInfo()
                 {
                     NodeId = randomNodeId,

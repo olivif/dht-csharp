@@ -14,7 +14,7 @@
         /// Being explicit about the 32 bit declaration
         /// since it's crucial to how routing will work between DHT nodes.
         /// </remarks>
-        public Int32 NodeId { get; set; }
+        public UInt32 NodeId { get; set; }
 
         /// <summary>
         /// Host name (or IP)
