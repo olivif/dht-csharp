@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\IRoutingTable.cs" />
     <Compile Include="Routing\RoutingTable.cs" />
+    <Compile Include="Routing\RoutingTableFactory.cs" />
     <Compile Include="Routing\Sha256HashGenerator.cs" />
     <Compile Include="Utils\Logger.cs" />
   </ItemGroup>
