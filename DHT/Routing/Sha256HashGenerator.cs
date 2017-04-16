@@ -15,14 +15,14 @@
             this.hasher = SHA256.Create();
         }
 
-        public Int32 Hash(string value)
+        public UInt32 Hash(string value)
         {
             Throw.IfNullOrEmpty(value, nameof(value));
 
             using (var stream = this.GenerateStreamFromString(value))
             {
                 var hashBytes = this.hasher.ComputeHash(stream);
-                var hashInt = BitConverter.ToInt32(hashBytes, 0);
+                var hashInt = BitConverter.ToUInt32(hashBytes, 0);
 
                 return hashInt;
             }

@@ -4,6 +4,6 @@
 
     public interface IConsistentHashGenerator
     {
-        Int32 Hash(string value);
+        UInt32 Hash(string value);
     }
 }

@@ -5,6 +5,7 @@
     using System.Linq;
     using ArgumentValidator;
     using DHT.Nodes;
+    using Utils;
 
     /// <summary>
     /// Routing table implementation
@@ -56,6 +57,9 @@
             // Hash the key to get the "partition" key
             var partitionKey = this.hashGenerator.Hash(key);
 
+            Logger.Log("RoutingTable - FindNode", "key = " + key);
+            Logger.Log("RoutingTable - FindNode", "partitionKey = " + partitionKey);
+
             // Now find the last node which has an id smaller than the
             // partition key. We also make sure that the nodes are sorted,
             // this might be overkill but unless we have millions of nodes
@@ -67,8 +71,11 @@
             // since the last node might get overloaded.
             if (partitionNode == null)
             {
+                Logger.Log("RoutingTable - FindNode", "Didn't find node, reverting to last");
                 partitionNode = this.SortedNodes.Last();
             }
+
+            Logger.Log("RoutingTable - FindNode", "FoundNode = " + partitionNode.NodeId);
 
             return partitionNode;
         }

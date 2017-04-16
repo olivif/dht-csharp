@@ -26,7 +26,7 @@
             var hashGenerator = new Mock<IConsistentHashGenerator>();
             hashGenerator
                 .Setup(x => x.Hash(It.IsAny<string>()))
-                .Returns(random.Next);
+                .Returns(() => { return (UInt32)random.Next(); });
 
             this.routingTableMockHash = new RoutingTable(hashGenerator.Object);
 
@@ -122,7 +122,7 @@
 
             for (int nodeIdx = 0; nodeIdx < numberOfNodes; nodeIdx++)
             {
-                var randomNodeId = random.Next();
+                var randomNodeId = (UInt32)random.Next(0, Int32.MaxValue);
                 var nodeInfo = new NodeInfo()
                 {
                     NodeId = randomNodeId
