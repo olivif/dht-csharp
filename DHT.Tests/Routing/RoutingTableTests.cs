@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using DHT.Nodes;
     using DHT.Routing;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
