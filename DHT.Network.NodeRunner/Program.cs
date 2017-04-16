@@ -5,6 +5,7 @@
     using DHT.Nodes;
     using DHT.Routing;
     using Grpc.Core;
+    using NodesProtocol;
 
     public class Program
     {

@@ -1,4 +1,4 @@
-﻿namespace DHT.Network
+﻿namespace DHT.NodesProtocol
 {
     using System.Data.Linq;
     using System.Threading.Tasks;
