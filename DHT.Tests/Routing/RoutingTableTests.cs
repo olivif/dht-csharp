@@ -35,7 +35,7 @@
         }
 
         [TestMethod]
-        public void RoutingTable_FindNode_RandomHashAndKeys()
+        public void RoutingTable_FindNode_FakeHash()
         {
             // Act Assert
             this.AssertFindNode(this.routingTableMockHash, 10, 100);
@@ -50,6 +50,11 @@
 
         private void AssertFindNode(IRoutingTable routingTable, int randomNodes, int randomKeys)
         {
+            Debug.WriteLine("--------");
+            Debug.WriteLine("Test starting with {0} nodes and {1} keys", randomNodes, randomKeys);
+            Debug.WriteLine("--------");
+            Debug.WriteLine(string.Empty);
+
             // Arrange
             var nodes = this.GetRandomNodes(randomNodes);
             var freq = new Dictionary<NodeInfo, int>();
@@ -74,10 +79,13 @@
             }
 
             // Print frequency
-            foreach (var freqKV in freq)
+            foreach (var freqKV in freq.OrderBy(n => n.Key.NodeId))
             {
                 Debug.WriteLine("Node {0} selected {1}", freqKV.Key.NodeId, freqKV.Value);
             }
+
+            Debug.WriteLine(string.Empty);
+            Debug.WriteLine(string.Empty);
         }
 
         private IList<string> GetRandomKeys(int numberOfKeys)
