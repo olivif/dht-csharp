@@ -66,6 +66,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <ProjectReference Include="..\DHT.Network.NodeRunner\DHT.Network.NodeRunner.csproj">
+      <Project>{07e4bbdf-a699-417a-ae38-ce60d953680e}</Project>
+      <Name>DHT.Network.NodeRunner</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DHT.ProtocolBuffers\DHT.ProtocolBuffers.csproj">
       <Project>{76baf981-f995-4cb9-b9d5-229a822bd8ff}</Project>
       <Name>DHT.ProtocolBuffers</Name>

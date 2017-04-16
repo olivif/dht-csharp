@@ -33,6 +33,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System.Interactive.Async, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Interactive.Async.3.0.0\lib\net45\System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Google.Protobuf.3.0.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="Grpc.Core, Version=1.0.1.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Grpc.Core.1.0.1\lib\net45\Grpc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +64,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DHT.ProtocolBuffers\DHT.ProtocolBuffers.csproj">
+      <Project>{76baf981-f995-4cb9-b9d5-229a822bd8ff}</Project>
+      <Name>DHT.ProtocolBuffers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DHT\DHT.csproj">
+      <Project>{cf2d500f-1ebf-43ee-b8c4-4096da5cfba4}</Project>
+      <Name>DHT</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="routingTable.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
