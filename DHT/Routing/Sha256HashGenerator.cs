@@ -18,6 +18,8 @@
         {
             if (value == null)
                 throw new ArgumentNullException();
+            if (string.IsNullOrEmpty(value))
+                throw new ArgumentException();
 
             using (var stream = this.GenerateStreamFromString(value))
             {

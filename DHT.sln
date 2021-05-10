@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHT", "DHT\DHT.csproj", "{CF2D500F-1EBF-43EE-B8C4-4096DA5CFBA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DHT", "DHT\DHT.csproj", "{CF2D500F-1EBF-43EE-B8C4-4096DA5CFBA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHT.ProtocolBuffers", "DHT.ProtocolBuffers\DHT.ProtocolBuffers.csproj", "{76BAF981-F995-4CB9-B9D5-229A822BD8FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DHT.ProtocolBuffers", "DHT.ProtocolBuffers\DHT.ProtocolBuffers.csproj", "{76BAF981-F995-4CB9-B9D5-229A822BD8FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHT.Runner", "DHT.Runner\DHT.Runner.csproj", "{40FABD93-3D5C-4DDD-99B5-288378F41FC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DHT.Runner", "DHT.Runner\DHT.Runner.csproj", "{40FABD93-3D5C-4DDD-99B5-288378F41FC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHT.Network.NodeRunner", "DHT.Network.NodeRunner\DHT.Network.NodeRunner.csproj", "{07E4BBDF-A699-417A-AE38-CE60D953680E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DHT.Network.NodeRunner", "DHT.Network.NodeRunner\DHT.Network.NodeRunner.csproj", "{07E4BBDF-A699-417A-AE38-CE60D953680E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHT.Tests", "DHT.Tests\DHT.Tests.csproj", "{88F3D24C-3A61-4CB4-B743-DC89AF3E183F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{07E4BBDF-A699-417A-AE38-CE60D953680E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07E4BBDF-A699-417A-AE38-CE60D953680E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07E4BBDF-A699-417A-AE38-CE60D953680E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88F3D24C-3A61-4CB4-B743-DC89AF3E183F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88F3D24C-3A61-4CB4-B743-DC89AF3E183F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88F3D24C-3A61-4CB4-B743-DC89AF3E183F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88F3D24C-3A61-4CB4-B743-DC89AF3E183F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
