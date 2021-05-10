@@ -1,10 +1,10 @@
 ﻿namespace DHT.NodesProtocol
 {
-    using System.Data.Linq;
-    using ArgumentValidator;
+    using DHT.Exceptions;
     using Dhtproto;
     using Grpc.Core;
     using Nodes;
+    using System;
 
     public class LocalNodeServerClient : DhtProtoService.DhtProtoServiceClient
     {
@@ -12,9 +12,7 @@
 
         public LocalNodeServerClient(INodeStore nodeStore)
         {
-            Throw.IfNull(nodeStore, nameof(nodeStore));
-
-            this.nodeStore = nodeStore;
+            this.nodeStore = nodeStore ?? throw new ArgumentNullException();
         }
 
         public LocalNodeServerClient()

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using DHT.Exceptions;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Data.Linq;
 
 namespace DHT.Nodes
 {

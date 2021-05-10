@@ -4,7 +4,6 @@
     using System.IO;
     using System.Security.Cryptography;
     using System.Text;
-    using ArgumentValidator;
 
     public class Sha256HashGenerator : IConsistentHashGenerator
     {
@@ -17,7 +16,8 @@
 
         public UInt32 Hash(string value)
         {
-            Throw.IfNullOrEmpty(value, nameof(value));
+            if (value == null)
+                throw new ArgumentNullException();
 
             using (var stream = this.GenerateStreamFromString(value))
             {

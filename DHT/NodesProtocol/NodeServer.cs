@@ -1,7 +1,7 @@
 ﻿namespace DHT.NodesProtocol
 {
+    using System;
     using System.Threading.Tasks;
-    using ArgumentValidator;
     using Dhtproto;
     using Grpc.Core;
     using Nodes;
@@ -21,13 +21,9 @@
 
         public NodeServer(NodeInfo nodeInfo, IRoutingTable routingTable, INodeServerClientFactory clientFactory)
         {
-            Throw.IfNull(nodeInfo, nameof(nodeInfo));
-            Throw.IfNull(routingTable, nameof(routingTable));
-            Throw.IfNull(clientFactory, nameof(clientFactory));
-
-            this.nodeInfo = nodeInfo;
-            this.routingTable = routingTable;
-            this.clientFactory = clientFactory;
+            this.nodeInfo = nodeInfo ?? throw new ArgumentNullException();
+            this.routingTable = routingTable ?? throw new ArgumentNullException();
+            this.clientFactory = clientFactory ?? throw new ArgumentNullException();
             this.localClient = clientFactory.CreateLocalClient();
         }
 

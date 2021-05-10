@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHT", "DHT\DHT.csproj", "{CF2D500F-1EBF-43EE-B8C4-4096DA5CFBA4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHT.Tests", "DHT.Tests\DHT.Tests.csproj", "{2B4BDB45-4547-41B4-89BD-453B0D6F7EF4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHT.ProtocolBuffers", "DHT.ProtocolBuffers\DHT.ProtocolBuffers.csproj", "{76BAF981-F995-4CB9-B9D5-229A822BD8FF}"
 EndProject
@@ -23,10 +21,6 @@ Global
 		{CF2D500F-1EBF-43EE-B8C4-4096DA5CFBA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF2D500F-1EBF-43EE-B8C4-4096DA5CFBA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF2D500F-1EBF-43EE-B8C4-4096DA5CFBA4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2B4BDB45-4547-41B4-89BD-453B0D6F7EF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B4BDB45-4547-41B4-89BD-453B0D6F7EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B4BDB45-4547-41B4-89BD-453B0D6F7EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B4BDB45-4547-41B4-89BD-453B0D6F7EF4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76BAF981-F995-4CB9-B9D5-229A822BD8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76BAF981-F995-4CB9-B9D5-229A822BD8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76BAF981-F995-4CB9-B9D5-229A822BD8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -42,5 +36,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA33AD8C-F009-46C0-938C-7256B40FE853}
 	EndGlobalSection
 EndGlobal

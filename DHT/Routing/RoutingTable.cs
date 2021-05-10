@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ArgumentValidator;
     using DHT.Nodes;
     using Utils;
 
@@ -23,11 +22,8 @@
 
         public RoutingTable(IConsistentHashGenerator hashGenerator, IList<NodeInfo> nodes)
         {
-            Throw.IfNull(nodes, nameof(nodes));
-            Throw.IfNull(hashGenerator, nameof(hashGenerator));
-
-            this.nodes = nodes;
-            this.hashGenerator = hashGenerator;
+            this.nodes = nodes ?? throw new ArgumentNullException();
+            this.hashGenerator = hashGenerator ?? throw new ArgumentNullException();
         }
 
         private IList<NodeInfo> SortedNodes

@@ -12,12 +12,12 @@
 
     class Program
     {
-        private static Random random = new Random();
+        private static Random random = new();
 
         private static IRoutingTable routingTable = RoutingTableFactory.FromFile("routingTable.txt");
 
         private static IList<Process> processes = new List<Process>();
-       
+
         static void Main(string[] args)
         {
             var commands = new Dictionary<string, Action<string, IList<string>>>()
@@ -55,6 +55,7 @@
         {
             Process p = new Process();
             p.StartInfo.FileName = "DHT.Network.NodeRunner.exe";
+            p.StartInfo.CreateNoWindow = true;
             p.StartInfo.Arguments = nodeInfo.NodeId.ToString();
 
             p.Start();
@@ -147,7 +148,7 @@
             {
                 Console.WriteLine("Error: {0} {1} ", e.Status.StatusCode, e.Status.Detail);
             }
-        }   
+        }
 
         private static NodeInfo GetRandomNode()
         {

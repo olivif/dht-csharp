@@ -1,84 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CF2D500F-1EBF-43EE-B8C4-4096DA5CFBA4}</ProjectGuid>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DHT</RootNamespace>
-    <AssemblyName>DHT</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ArgumentValidator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=32e64619b0d333b5, processorArchitecture=MSIL">
-      <HintPath>..\packages\Argument.Validator.1.0.2\lib\ArgumentValidator.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <ProjectReference Include="..\DHT.ProtocolBuffers\DHT.ProtocolBuffers.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NodesProtocol\INodeServerClientFactory.cs" />
-    <Compile Include="NodesProtocol\LocalNodeServerClient.cs" />
-    <Compile Include="NodesProtocol\NodeServerClientFactory.cs" />
-    <Compile Include="Nodes\INodeStore.cs" />
-    <Compile Include="Nodes\NodeStore.cs" />
-    <Compile Include="Routing\IConsistentHashGenerator.cs" />
-    <Compile Include="NodesProtocol\NodeServer.cs" />
-    <Compile Include="Nodes\NodeInfo.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Routing\IRoutingTable.cs" />
-    <Compile Include="Routing\RoutingTable.cs" />
-    <Compile Include="Routing\RoutingTableFactory.cs" />
-    <Compile Include="Routing\Sha256HashGenerator.cs" />
-    <Compile Include="Utils\Logger.cs" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.2.222702">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Grpc.Core, Version=1.0.1.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Grpc.Core.1.0.1\lib\net45\Grpc.Core.dll</HintPath>
-    </Reference>
-    <ProjectReference Include="..\DHT.ProtocolBuffers\DHT.ProtocolBuffers.csproj">
-      <Project>{76baf981-f995-4cb9-b9d5-229a822bd8ff}</Project>
-      <Name>DHT.ProtocolBuffers</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
